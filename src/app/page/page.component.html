@@ -1,0 +1,95 @@
+<mat-toolbar class="toolbar">
+    <span>LNKSHRTNR</span>
+</mat-toolbar>
+
+<mat-tab-group mat-align-tabs="center" dynamicHeight class="tabs" (selectedTabChange)="onTabChange($event)">
+
+    <mat-tab label="All Links" class="tab3">
+        <div class="sub-title">
+            <h1>CREATED LINKS</h1>
+        </div>
+
+        <div>
+            <mat-table #table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="link">
+                    <mat-header-cell *matHeaderCellDef> Links </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.link}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="shortURL">
+                    <mat-header-cell *matHeaderCellDef> Shortened URL </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.short}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+            </mat-table>
+
+        </div>
+
+    </mat-tab>
+
+    <mat-tab label="Shorten Link" class="tab1">
+        <div class="sub-title">
+            <h1>SHORTEN A LINK</h1>
+        </div>
+        <mat-card class="card short">
+            <form class="formClass">
+                <mat-form-field MatFormFieldControl class="linkField">
+                    <mat-label>Insert Link</mat-label>
+                    <input matInput placeholder="Ex. Pizza" name="shortInput" [(ngModel)]="shortenInput">
+                </mat-form-field>
+
+                <div *ngIf="shortenInput.length < 30" id="min-limit">
+                    <p>Link must be more than 30 characters</p>
+                </div>
+
+                <mat-card class="card"> 
+                    <h2>Shortened Link</h2>
+                    <div class="result">{{shortenInput | shortUrl}}</div>
+                </mat-card>
+
+                <div class="submit-btn">
+                    <button mat-raised-button 
+                    class="btn"
+                    [ngClass]="shortenInput.length < 30 ? 'disable-btn' : ''"
+                    id="shorten-btn" 
+                    (click)="onSubmit('shorten')">Create</button>
+                </div>
+            </form>
+        </mat-card>
+    </mat-tab>
+
+    <mat-tab label="Expand Link" class="tab2">
+        <mat-card class="card expand">
+            <div class="sub-title">
+                <h1>EXPAND A LINK</h1>
+            </div>
+            <form class="formClass">
+                <mat-form-field  MatFormFieldControl class="linkField">
+                    <mat-label>Insert Link</mat-label>
+                    <input matInput placeholder="Ex. Pizza" name="expandInput" [(ngModel)]="expandInput">
+                </mat-form-field>
+                
+                <div class="submit-btn" 
+                *ngIf="!toClear" 
+                [ngClass]="expandInput.length === 0 ? 'disable-btn' : ''">
+                    <button mat-raised-button class="btn"  (click)="onSubmit('expand')">Go</button>
+                </div>
+
+                <div id="clear-btn" class="submit-btn" *ngIf="toClear">
+                    <button mat-raised-button class="clear" (click)="onClear()">Clear</button>
+                </div>
+                                
+                <mat-card class="card">
+                    <h2>Expanded Link</h2>
+                    <div class="result">{{result}}</div>
+                </mat-card>
+            </form>
+                
+        </mat-card>
+    </mat-tab>
+
+</mat-tab-group>

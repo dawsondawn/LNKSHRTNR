@@ -1,0 +1,59 @@
+.toolbar{
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px; 
+    background-color: rgb(58, 87, 87);
+    color: white;
+    height: 15%;
+}
+
+.tabs{
+    margin-top: 20px;
+}
+
+.sub-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 8px; 
+}
+
+.formClass{
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    margin: 16px;
+    padding: 16px;
+    border-radius: 8px;  
+}
+
+.linkField{
+    width: 100%;
+    font-size: x-large;
+}
+
+.submit-btn{
+    margin:30px 0 20px 0;
+}
+
+.clear{
+    background-color: rgb(196, 52, 33);
+    color: white;
+}
+
+.btn{
+    background-color: rgb(58, 87, 87);
+    color: white;
+}
+
+.disable-btn{
+    opacity: 50%;
+    pointer-events: none;
+}
+
+.result{
+    width: 100%;
+    font-size: x-large;
+}
